@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_SUPABASE_URL=https://wqdmvlzpcexivzjhjbgw.supabase.co
+      - VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxZG12bHpwY2V4aXZ6amhqYmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4OTUxODUsImV4cCI6MjA1NDQ3MTE4NX0.Fdv9cutq90FX_cTayC7OQA2fO9LdC3IIKeAeikvNp-0
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - SUPABASE_URL=https://wqdmvlzpcexivzjhjbgw.supabase.co
+      - SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxZG12bHpwY2V4aXZ6amhqYmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4OTUxODUsImV4cCI6MjA1NDQ3MTE4NX0.Fdv9cutq90FX_cTayC7OQA2fO9LdC3IIKeAeikvNp-0
+    volumes:
+      - ./backend:/app
+    devices:
+      - /dev/video0:/dev/video0 # For webcam access
